@@ -43,11 +43,6 @@ class MainPage(BasePage):
         sleep(2)
         return True
 
-    def check_footer(self):
-        word_to_check = "All Rights Reserved"
-        f_element = self.driver.find_element(*MainPageLocator.F_PARA).text
-        return word_to_check in f_element
-
 class AboutUsPage(BasePage):
     def check_advisors_image(self):
         advisor_images = self.driver.find_elements(*AboutUsPageLocator.ADVISORS_IMAGES)
