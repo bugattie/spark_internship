@@ -88,3 +88,13 @@ class WorkshopPage(BasePage):
         else:
             print('Footer is not being displayed at workshop page');
             return False;
+
+class JoinUsPage(BasePage):
+    def footer_links(self):
+        footer_link_elements = self.driver.find_elements(*JoinUsPageLocator.FOOTER_LINKS)
+        for i in range(len(footer_link_elements)):
+            if req.head(footer_link_elements[i].get_attribute('href')).status_code == 200:
+                print(f"{footer_link_elements[i].get_attribute('href')} is a valid link")
+            else:
+                print(f"{footer_link_elements[i].get_attribute('href')} is a broken link")
+        return True
