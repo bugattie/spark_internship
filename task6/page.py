@@ -1,5 +1,7 @@
+from selenium.webdriver.support.color import Color
 from locator import *
 from time import sleep
+import requests as req
 
 
 class BasePage(object):
@@ -52,8 +54,37 @@ class AboutUsPage(BasePage):
                 print(f"{advisor_details[i].text} image is displaying.")
             else:
                 print(f"{advisor_details[i].text} image is not displaying")
-            
         return True
-        
 
+class WorkshopPage(BasePage):
+    def heading_test(self):
+        heading_element = self.driver.find_element(*WorkShopPageLocator.WORKSHOP_HEADING)
+        return "Workshops" in heading_element.text
 
+    def upcoming_workshop_btn_test(self):
+        workshops_title = self.driver.find_elements(*WorkShopPageLocator.WORKSHOP_TITLE_ELEMENT)
+        color_to_match = '#1bb4b9'
+        for i in range(len(workshops_title)):
+            rgb = workshops_title[i].value_of_css_property('background')
+            hex_value = Color.from_string(rgb[:17]).hex
+            if color_to_match == hex_value:
+                continue
+            else:
+                print('Color are not the same')
+        return True
+
+    def scroll_btn(self):
+        btn_element = self.driver.find_element(*WorkShopPageLocator.BTN_ELEMENT)
+        if btn_element.is_displayed():
+            return True
+        else:
+            print('Scroll button is missing')
+            return False
+
+    def footer_appearance(self):
+        footer_element = self.driver.find_element(*WorkShopPageLocator.FOOTER_ELEMENT)
+        if footer_element.is_displayed():
+            return True;
+        else:
+            print('Footer is not being displayed at workshop page');
+            return False;
