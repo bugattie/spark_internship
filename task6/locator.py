@@ -18,3 +18,6 @@ class WorkShopPageLocator(object):
     WORKSHOP_TITLE_ELEMENT = (By.CSS_SELECTOR, 'div.blog-info a.button-w3layouts.hvr-rectangle-out')
     BTN_ELEMENT = (By.ID, 'toTop')
     FOOTER_ELEMENT = (By.CSS_SELECTOR, 'div.footer.w3layouts')
+
+class JoinUsPageLocator(object):
+    FOOTER_LINKS = (By.CSS_SELECTOR, 'div.col-md-3.footer-grids.w3l-agileits ul.b-nav li a')
