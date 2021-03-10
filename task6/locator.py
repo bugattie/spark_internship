@@ -12,3 +12,9 @@ class MainPageLocator(object):
 class AboutUsPageLocator(object):
     ADVISORS_IMAGES = (By.CSS_SELECTOR, 'div.single-middle a')
     ADVISORS_DETAILS = (By.CSS_SELECTOR, 'div.single-middle div.media-body h4')
+
+class WorkShopPageLocator(object):
+    WORKSHOP_HEADING = (By.CSS_SELECTOR, 'div.container h2.inner-tittle-w3layouts')
+    WORKSHOP_TITLE_ELEMENT = (By.CSS_SELECTOR, 'div.blog-info a.button-w3layouts.hvr-rectangle-out')
+    BTN_ELEMENT = (By.ID, 'toTop')
+    FOOTER_ELEMENT = (By.CSS_SELECTOR, 'div.footer.w3layouts')
