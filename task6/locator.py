@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
 
-
-class MainPageLocator(object):
+class AllPageLocators(object):
     LOGO = (By.CSS_SELECTOR, 'a.navbar-brand img')
     NAVBAR = (By.CSS_SELECTOR, 'div.container nav.navbar.navbar-default')
+
+class MainPageLocator(object):
     SLIDER_LINKS = (By.CSS_SELECTOR, 'div.flexslider ol li a')
     WORD = (By.CSS_SELECTOR, 'li.flex-active-slide div h3')
     UP_BTN = (By.ID, 'toTopHover')
@@ -21,3 +22,8 @@ class WorkShopPageLocator(object):
 
 class JoinUsPageLocator(object):
     FOOTER_LINKS = (By.CSS_SELECTOR, 'div.col-md-3.footer-grids.w3l-agileits ul.b-nav li a')
+
+class LinkPageLocator(object):
+    RIGHT_CONTENT_LINKS = (By.CSS_SELECTOR, 'div.w3l-blog-list ul li.tsf-button a')
+    HEAD_LINK = (By.CSS_SELECTOR, 'div.blog-info h4 a')
+    BTN_LINK = (By.CSS_SELECTOR, 'div.media div div div a')
