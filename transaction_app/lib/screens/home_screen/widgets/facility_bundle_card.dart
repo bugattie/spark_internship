@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
-import '../../../models/recipe_bundle.dart';
+import '../../../models/facilities_bundle.dart';
+// import '../../../constants.dart';
 // import '../../customer_screen/customer_screen.dart';
 
-class RecipeBundleCard extends StatelessWidget {
+class FacilityBundleCard extends StatelessWidget {
   final GridBundle productItem;
 
-  RecipeBundleCard(this.productItem);
+  FacilityBundleCard(this.productItem);
   @override
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
@@ -43,6 +44,7 @@ class RecipeBundleCard extends StatelessWidget {
                       productItem.description,
                       style: TextStyle(
                         color: Colors.white54,
+                        fontSize: defaultSize * 1.5,
                       ),
                     ),
                     Spacer(),
@@ -54,7 +56,7 @@ class RecipeBundleCard extends StatelessWidget {
                           fontSize: 10,
                         ),
                       ),
-                      icon: Icon(Icons.person_outline_sharp),
+                      icon: productItem.btnIcon,
                       label: Text(
                         productItem.btnText,
                       ),

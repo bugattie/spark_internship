@@ -5,6 +5,7 @@ import '../screens/customer_screen/customer_screen.dart';
 class GridBundle {
   final String id, title, description, imageSrc, btnText, onClick;
   final Color btnColor, backgroundColor;
+  final Icon btnIcon;
 
   GridBundle({
     this.id,
@@ -15,6 +16,7 @@ class GridBundle {
     this.imageSrc,
     this.btnColor,
     this.backgroundColor,
+    this.btnIcon,
   });
 }
 
@@ -29,6 +31,7 @@ class GridItem {
       backgroundColor: Color(0xFFD82D40),
       btnColor: Color(0xFF84AB5C),
       onClick: CustomerScreen.routeName,
+      btnIcon: Icon(Icons.person_outline_sharp),
     ),
     GridBundle(
       id: DateTime.now().toString(),
@@ -39,6 +42,7 @@ class GridItem {
       backgroundColor: Color(0xFF09A99F),
       btnColor: Color(0xFF84AB5C),
       onClick: CustomerScreen.routeName,
+      btnIcon: Icon(Icons.attach_money),
     ),
     GridBundle(
       id: DateTime.now().toString(),
@@ -49,6 +53,7 @@ class GridItem {
       backgroundColor: Color(0xFF473080),
       btnColor: Color(0xFF84AB5C),
       onClick: CustomerScreen.routeName,
+      btnIcon: Icon(Icons.history_sharp),
     ),
   ];
 

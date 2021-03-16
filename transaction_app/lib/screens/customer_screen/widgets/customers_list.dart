@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/user.dart';
+import '../../customer_detail_screen/customer_detail_screen.dart';
 
 class CustomerList extends StatelessWidget {
-  final User currentUser;
+  final int index;
 
-  CustomerList(this.currentUser);
+  CustomerList(this.index);
 
   @override
   Widget build(BuildContext context) {
+    final userData = Provider.of<UserData>(context, listen: false);
     return Card(
       child: ListTile(
         leading: CircleAvatar(
           child: Image.asset(
-            currentUser.imageSrc,
+            userData.users[index].imageSrc,
             fit: BoxFit.cover,
           ),
         ),
         title: Text(
-          currentUser.name,
+          userData.users[index].name,
         ),
-        subtitle: Text(currentUser.amount.toString()),
+        subtitle: Text(userData.users[index].amount.toString()),
         trailing: ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Color(0xFF84AB5C),
@@ -30,7 +33,12 @@ class CustomerList extends StatelessWidget {
             ),
           ),
           child: Text('View Me'),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(
+              CustomerDetailScreen.routeName,
+              arguments: userData.users[index].id,
+            );
+          },
         ),
       ),
     );

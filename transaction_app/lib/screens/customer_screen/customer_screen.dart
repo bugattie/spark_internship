@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/user.dart';
 import './widgets/customers_list.dart';
+import '../../constants.dart';
 
 class CustomerScreen extends StatelessWidget {
   static const routeName = '/customer';
   @override
   Widget build(BuildContext context) {
-    final userData = UserData().users;
+    final userData = Provider.of<UserData>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: SvgPicture.asset('assets/icons/menu_icon.svg'),
-          onPressed: () {},
+          icon: Icon(
+            Icons.keyboard_backspace_rounded,
+            color: kTextLigntColor,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
         centerTitle: true,
         title: Text(
@@ -22,21 +28,12 @@ class CustomerScreen extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: SvgPicture.asset('assets/icons/search_icon.svg'),
-            onPressed: () {},
-          ),
-          SizedBox(
-            width: 5,
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
-          itemCount: userData.length,
-          itemBuilder: (ctx, i) => CustomerList(userData[i]),
+          itemCount: userData.users.length,
+          itemBuilder: (ctx, i) => CustomerList(i),
         ),
       ),
     );

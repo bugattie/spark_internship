@@ -1,97 +1,87 @@
 import 'package:flutter/foundation.dart';
 
 class User {
-  final String id, name, description, imageSrc;
+  final String id, name, imageSrc, email;
   final double amount;
 
   User({
     @required this.id,
     @required this.name,
-    @required this.description,
+    @required this.email,
     @required this.imageSrc,
     @required this.amount,
   });
 }
 
-class UserData {
+class UserData with ChangeNotifier {
   List<User> _users = [
     User(
       id: DateTime.now().toString(),
       name: 'John Doe',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'johndoe@domain.com',
       imageSrc: 'assets/images/customer_male.png',
       amount: 5000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Jane Doe',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'janedoe@domain.com',
       imageSrc: 'assets/images/customer_female.png',
       amount: 7000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'James Mary',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'jamesmary@domain.com',
       imageSrc: 'assets/images/customer_male.png',
       amount: 8000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Lisa Ann',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'lisaann@domain.com',
       imageSrc: 'assets/images/customer_female.png',
       amount: 8000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Andrew Jane',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'andrewjane@domain.com',
       imageSrc: 'assets/images/customer_male.png',
       amount: 11000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Sarah Thomas',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'sarahthomas@domain.com',
       imageSrc: 'assets/images/customer_female.png',
       amount: 13000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Mark Paul',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'markpaul@domain.com',
       imageSrc: 'assets/images/customer_male.png',
       amount: 12000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Lisa Daniel',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'lisadaniel@domain.com',
       imageSrc: 'assets/images/customer_female.png',
       amount: 14000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Jason Ryan',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'jasonryan@domain.com',
       imageSrc: 'assets/images/customer_male.png',
       amount: 11000.0,
     ),
     User(
       id: DateTime.now().toString(),
       name: 'Anna Helen',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      email: 'annahelen@domain.com',
       imageSrc: 'assets/images/customer_male.png',
       amount: 13000.0,
     ),
@@ -99,5 +89,9 @@ class UserData {
 
   List<User> get users {
     return [..._users];
+  }
+
+  User findById(String id) {
+    return _users.firstWhere((data) => data.id == id);
   }
 }
