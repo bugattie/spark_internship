@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/customer_screen/customer_screen.dart';
+import '../screens/transaction_screen/transaction_screen.dart';
 
 class GridBundle {
   final String id, title, description, imageSrc, btnText, onClick;
@@ -38,10 +39,10 @@ class GridItem {
       title: 'Transaction',
       description: 'Make a transaction to our customers',
       btnText: 'Add Transaction',
-      imageSrc: 'assets/images/transaction.png',
-      backgroundColor: Color(0xFF09A99F),
+      imageSrc: 'assets/images/transaction_check_two.png',
+      backgroundColor: Color(0xFF1976D3),
       btnColor: Color(0xFF84AB5C),
-      onClick: CustomerScreen.routeName,
+      onClick: TransactionScreen.routeName,
       btnIcon: Icon(Icons.attach_money),
     ),
     GridBundle(

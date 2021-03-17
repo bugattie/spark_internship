@@ -11,7 +11,7 @@ class CustomerDetailScreen extends StatelessWidget {
     SizeConfig().init(context);
 
     return Scaffold(
-      appBar: BuildAppBar(),
+      appBar: BuildAppBar(title: 'Profile'),
       body: Body(),
     );
   }
@@ -21,6 +21,8 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(70);
 
+  final String title;
+  BuildAppBar({this.title});
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -35,7 +37,7 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: kPrimaryColor,
       centerTitle: true,
-      title: Text('Profile'),
+      title: Text(title),
     );
   }
 }

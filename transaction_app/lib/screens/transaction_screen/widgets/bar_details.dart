@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 
+import '../../customer_detail_screen/widgets/info.dart' show CustomShapeBar;
 import '../../../size_config.dart';
 import '../../../constants.dart';
 
-class Info extends StatelessWidget {
-  const Info({
-    this.name,
-    this.image,
-    this.email,
-    this.amount,
-    Key key,
-    @required this.defaultSize,
-  }) : super(key: key);
+class BarDetails extends StatelessWidget {
+  final double defaultSize;
+  final String image, heading;
 
-  final double defaultSize, amount;
-  final String image, email, name;
+  BarDetails({
+    this.defaultSize,
+    this.image,
+    this.heading,
+  });
 
   @override
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
     return SizedBox(
-      height: defaultSize * 24, // 240
+      height: defaultSize * 24,
       child: Stack(
         children: [
           ClipPath(
@@ -50,25 +48,9 @@ class Info extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  name,
+                  heading,
                   style:
                       TextStyle(fontSize: defaultSize * 2.2, color: kTextColor),
-                ),
-                SizedBox(
-                  height: defaultSize / 2,
-                ), //5
-                Text(
-                  email,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400, color: kTextLigntColor),
-                ),
-                SizedBox(
-                  height: defaultSize / 2,
-                ), //5
-                Text(
-                  '\$$amount',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400, color: kTextLigntColor),
                 ),
               ],
             ),
@@ -76,24 +58,5 @@ class Info extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class CustomShapeBar extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    double height = size.height;
-    double width = size.width;
-    path.lineTo(0, height - 60);
-    path.quadraticBezierTo(width / 2, height, width, height - 60);
-    path.lineTo(width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

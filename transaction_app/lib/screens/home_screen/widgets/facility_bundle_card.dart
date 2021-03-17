@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
 import '../../../models/facilities_bundle.dart';
-// import '../../../constants.dart';
+import '../../../constants.dart';
 // import '../../customer_screen/customer_screen.dart';
 
 class FacilityBundleCard extends StatelessWidget {
@@ -50,7 +50,7 @@ class FacilityBundleCard extends StatelessWidget {
                     Spacer(),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        primary: productItem.btnColor,
+                        primary: kButtonColor,
                         onPrimary: Colors.white,
                         textStyle: TextStyle(
                           fontSize: 10,
@@ -73,8 +73,9 @@ class FacilityBundleCard extends StatelessWidget {
               aspectRatio: 0.71,
               child: Image.asset(
                 productItem.imageSrc,
-                fit: BoxFit.cover,
-                alignment: Alignment.centerLeft,
+                height: 500,
+                // fit: BoxFit.cover,
+                // alignment: Alignment.centerLeft,
               ),
             ),
           ],

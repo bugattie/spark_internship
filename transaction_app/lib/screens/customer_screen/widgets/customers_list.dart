@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/user.dart';
 import '../../customer_detail_screen/customer_detail_screen.dart';
+import '../../../constants.dart';
 
 class CustomerList extends StatelessWidget {
   final int index;
@@ -23,10 +24,10 @@ class CustomerList extends StatelessWidget {
         title: Text(
           userData.users[index].name,
         ),
-        subtitle: Text(userData.users[index].amount.toString()),
+        subtitle: Text('\$${userData.users[index].amount}'),
         trailing: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Color(0xFF84AB5C),
+            primary: kPrimaryColor,
             onPrimary: Colors.white,
             textStyle: TextStyle(
               fontSize: 10,

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import './screens/home_screen/home_screen.dart';
 import './screens/customer_screen/customer_screen.dart';
 import './screens/customer_detail_screen/customer_detail_screen.dart';
+import './screens/transaction_screen/transaction_screen.dart';
 import './models/user.dart';
 
 void main() {
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         routes: {
           CustomerScreen.routeName: (ctx) => CustomerScreen(),
           CustomerDetailScreen.routeName: (ctx) => CustomerDetailScreen(),
+          TransactionScreen.routeName: (ctx) => TransactionScreen(),
         },
       ),
     );

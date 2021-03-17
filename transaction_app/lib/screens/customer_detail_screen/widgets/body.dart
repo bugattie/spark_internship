@@ -41,7 +41,7 @@ class Body extends StatelessWidget {
           icon: Icon(Icons.attach_money),
           label: Text('Make a transaction'),
           style: ElevatedButton.styleFrom(
-            primary: Color(0xFF1976D3),
+            primary: kPrimaryColor,
           ),
         ),
       ],

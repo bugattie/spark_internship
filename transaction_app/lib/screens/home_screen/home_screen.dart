@@ -11,7 +11,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: SvgPicture.asset('assets/icons/menu_icon.svg'),
+          icon: SvgPicture.asset(
+            'assets/icons/menu_icon.svg',
+            color: Colors.black,
+            width: 15,
+          ),
           onPressed: () {},
         ),
         centerTitle: true,
@@ -23,7 +27,11 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: SvgPicture.asset('assets/icons/search_icon.svg'),
+            icon: SvgPicture.asset(
+              'assets/icons/search_icon.svg',
+              width: 15,
+              color: Colors.black,
+            ),
             onPressed: () {},
           ),
           SizedBox(
