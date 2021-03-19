@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
 import '../../../constants.dart';
+import './custom_shape.dart';
 
 class Info extends StatelessWidget {
   const Info({
@@ -76,24 +77,5 @@ class Info extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class CustomShapeBar extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    double height = size.height;
-    double width = size.width;
-    path.lineTo(0, height - 60);
-    path.quadraticBezierTo(width / 2, height, width, height - 60);
-    path.lineTo(width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
   }
 }
