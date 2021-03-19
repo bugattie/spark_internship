@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../transaction_screen/transaction_screen.dart';
 import '../../../size_config.dart';
 import '../../../constants.dart';
 import '../../../models/user.dart';
@@ -38,10 +39,10 @@ class Body extends StatelessWidget {
         ),
         ElevatedButton.icon(
           onPressed: () {
-            // Navigator.of(context).pushNamed(
-            //   TransactionScreen.routeName,
-            //   arguments: currentUser,
-            // );
+            Navigator.of(context).pushNamed(
+              TransactionScreen.routeName,
+              arguments: currentUser,
+            );
           },
           icon: Icon(Icons.attach_money),
           label: Text('Make a transaction'),
