@@ -15,6 +15,19 @@ class BuildAppForm extends StatefulWidget {
 
 class _BuildAppFormState extends State<BuildAppForm> {
   String _currentItemSelected = 'janedoe@service.com';
+  final _form = GlobalKey<FormState>();
+  var _editedTransaction = Transaction(
+    id: null,
+    senderEmail: '',
+    receiverEmail: '',
+    amount: 0,
+  );
+
+  void _saveForm() {
+    final isValid = _form.currentState.validate();
+    if (!isValid) return;
+    _form.currentState.save();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +36,7 @@ class _BuildAppFormState extends State<BuildAppForm> {
     double defaultSize = SizeConfig.defaultSize;
 
     return Form(
+      key: _form,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -51,6 +65,12 @@ class _BuildAppFormState extends State<BuildAppForm> {
                       );
                     }).toList(),
                     onChanged: (String selectItem) {
+                      _editedTransaction = Transaction(
+                        id: null,
+                        senderEmail: _currentUser.email,
+                        receiverEmail: selectItem,
+                        amount: _editedTransaction.amount,
+                      );
                       setState(() {
                         _currentItemSelected = selectItem;
                       });
@@ -81,6 +101,32 @@ class _BuildAppFormState extends State<BuildAppForm> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
+                    onFieldSubmitted: (_) {
+                      _saveForm();
+                    },
+                    onSaved: (value) {
+                      _editedTransaction = Transaction(
+                        id: null,
+                        senderEmail: _currentUser.email,
+                        receiverEmail: _editedTransaction.receiverEmail,
+                        amount: double.parse(value),
+                      );
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter an amount';
+                      }
+                      if (double.tryParse(value) == null) {
+                        return 'Please enter a valid amount';
+                      }
+                      if (double.parse(value) <= 0) {
+                        return 'Please enter an that is greater than zero.';
+                      }
+                      if (double.parse(value) >= _currentUser.amount) {
+                        return "You don't have that much amount ";
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ],
@@ -90,7 +136,9 @@ class _BuildAppFormState extends State<BuildAppForm> {
             height: 25,
           ),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              _saveForm();
+            },
             icon: Icon(Icons.attach_money),
             label: Text('Transfer Amount'),
             style: ElevatedButton.styleFrom(
