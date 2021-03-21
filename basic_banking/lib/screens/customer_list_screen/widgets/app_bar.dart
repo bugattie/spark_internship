@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  CustomAppBar(this.title);
+
   @override
   Size get preferredSize => const Size.fromHeight(60);
 
@@ -20,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
       ),
       centerTitle: true,
-      title: Text('Our Customers'),
+      title: Text(title),
     );
   }
 }

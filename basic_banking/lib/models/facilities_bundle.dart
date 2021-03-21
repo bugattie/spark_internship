@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-// import '../screens/customer_screen/customer_screen.dart';
-// import '../screens/transaction_screen/transaction_screen.dart';
 import '../screens/customer_list_screen/customer_list_screen.dart';
+import '../screens/transaction_history/transaction_history.dart';
 
 class GridItem {
   final String id, title, description, imageSrc, btnText, onClick;
@@ -40,7 +39,7 @@ class GridBundle {
       btnText: 'View History',
       imageSrc: 'assets/images/history.png',
       backgroundColor: Color(0xFF316792),
-      onClick: CustomerListScreen.routeName,
+      onClick: TransactionHistory.routeName,
       btnIcon: Icon(Icons.history_sharp),
     ),
   ];

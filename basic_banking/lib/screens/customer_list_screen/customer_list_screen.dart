@@ -15,7 +15,7 @@ class CustomerListScreen extends StatelessWidget {
     final userData = Provider.of<UserData>(context, listen: false).users;
 
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar('Our Customers'),
       body: Padding(
         padding: EdgeInsets.all(defaultSize * 0.8),
         child: ListView.builder(
