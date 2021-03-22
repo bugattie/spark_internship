@@ -40,17 +40,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-// builder: (ctx, data, ch) => data.transactions.length <= 0
-//                         ? ch
-//                         : ListView.builder(
-//                             itemCount: transactionItems.transactions.length,
-//                             itemBuilder: (ctx, i) => TransactionListBuild(
-//                               id: transactionItems.transactions[i].id,
-//                               senderEmail:
-//                                   transactionItems.transactions[i].senderEmail,
-//                               receiverEmail: transactionItems
-//                                   .transactions[i].receiverEmail,
-//                               amount: transactionItems.transactions[i].amount,
-//                             ),
-//                           ),

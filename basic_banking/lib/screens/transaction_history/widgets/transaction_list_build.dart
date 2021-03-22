@@ -25,12 +25,9 @@ class TransactionListBuild extends StatelessWidget {
         leading: CircleAvatar(
           child: Text(id.toString()),
         ),
-        title: Text(
-          'Sender: $senderEmail',
-          style: TextStyle(color: kTextLigntColor),
+        subtitle: Text(
+          'Sender: $senderEmail \nReceiver: $receiverEmail \nAmount: $amount',
         ),
-        subtitle: Text('Receiver: $receiverEmail'),
-        trailing: Text('Amount: $amount'),
       ),
     );
   }

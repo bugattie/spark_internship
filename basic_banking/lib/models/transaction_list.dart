@@ -7,7 +7,7 @@ class TransactionList with ChangeNotifier {
   List<Transaction> _transactions = [];
 
   List<Transaction> get transactions {
-    return [..._transactions];
+    return [..._transactions.reversed];
   }
 
   Future<void> addTransaction(
@@ -34,7 +34,6 @@ class TransactionList with ChangeNotifier {
 
     Transaction.parseTransactionList(dataList);
     _transactions = Transaction.parseTransactionList(dataList);
-    print('After parsing: ${_transactions[0].receiverEmail}');
     notifyListeners();
   }
 }
