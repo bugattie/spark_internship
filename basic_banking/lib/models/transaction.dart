@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
-
 class Transaction {
-  final String id;
+  int id;
   final String senderEmail;
   final String receiverEmail;
   final double amount;
@@ -12,29 +10,27 @@ class Transaction {
     this.receiverEmail,
     this.amount,
   });
-}
 
-class TransactionList with ChangeNotifier {
-  List<Transaction> _transactions = [
-    Transaction(
-      id: '1',
-      senderEmail: 'senderEmail@service.com',
-      receiverEmail: 'receiverEmail@service.com',
-      amount: 6000.0,
-    ),
-    Transaction(
-      id: '2',
-      senderEmail: 'senderEmail@service.com',
-      receiverEmail: 'receiverEmail@service.com',
-      amount: 6000.0,
-    )
-  ];
-
-  List<Transaction> get transactions {
-    return [..._transactions];
+  factory Transaction.fromMap(Map<String, dynamic> map) {
+    print("Map: ${map['amount']}");
+    var trans = Transaction(
+      id: map['id'],
+      senderEmail: map['senderEmail'],
+      receiverEmail: map['receiverEmail'],
+      amount: map['amount'],
+    );
+    print(trans);
+    return trans;
   }
 
-  void addTransaction() {
-    // ...
+  static List<Transaction> parseTransactionList(List<dynamic> list) {
+    if (list == null) return null;
+
+    final transactionList = <Transaction>[];
+    for (final item in list) {
+      transactionList.insert(0, Transaction.fromMap(item));
+    }
+
+    return transactionList;
   }
 }

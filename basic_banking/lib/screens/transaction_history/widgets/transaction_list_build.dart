@@ -4,7 +4,7 @@ import '../../../size_config.dart';
 import '../../../constants.dart';
 
 class TransactionListBuild extends StatelessWidget {
-  final String id;
+  final int id;
   final String senderEmail;
   final String receiverEmail;
   final double amount;
@@ -23,7 +23,7 @@ class TransactionListBuild extends StatelessWidget {
       margin: EdgeInsets.only(bottom: defaultSize),
       child: ListTile(
         leading: CircleAvatar(
-          child: Text(id),
+          child: Text(id.toString()),
         ),
         title: Text(
           'Sender: $senderEmail',

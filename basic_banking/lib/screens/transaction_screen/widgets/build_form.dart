@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/transaction_list.dart';
 import '../../../models/transaction.dart';
 import '../../../models/user.dart';
 import '../../../size_config.dart';
@@ -16,17 +17,27 @@ class BuildAppForm extends StatefulWidget {
 class _BuildAppFormState extends State<BuildAppForm> {
   String _currentItemSelected = 'janedoe@service.com';
   final _form = GlobalKey<FormState>();
+  // int newId = 0;
   var _editedTransaction = Transaction(
-    id: null,
+    id: 0,
     senderEmail: '',
     receiverEmail: '',
     amount: 0,
   );
 
-  void _saveForm() {
+  void _saveForm() async {
     final isValid = _form.currentState.validate();
     if (!isValid) return;
     _form.currentState.save();
+
+    final trans = Provider.of<TransactionList>(context, listen: false);
+    trans.addTransaction(
+      _editedTransaction.id,
+      _editedTransaction.senderEmail,
+      _editedTransaction.receiverEmail,
+      _editedTransaction.amount,
+    );
+    Navigator.of(context).pop();
   }
 
   @override
@@ -40,97 +51,86 @@ class _BuildAppFormState extends State<BuildAppForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text('Select a person'),
+          SizedBox(
+            height: 10,
+          ),
           Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Select a person'),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: defaultSize * 1.0,
-                    vertical: defaultSize * 0.5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(defaultSize * 1.0),
-                  ),
-                  child: DropdownButton(
-                    icon: Icon(Icons.arrow_drop_down_outlined),
-                    iconSize: 42,
-                    underline: SizedBox(),
-                    items: userData.users.map((User dropDownItem) {
-                      return DropdownMenuItem(
-                        value: dropDownItem.email,
-                        child: Text(dropDownItem.email),
-                      );
-                    }).toList(),
-                    onChanged: (String selectItem) {
-                      _editedTransaction = Transaction(
-                        id: null,
-                        senderEmail: _currentUser.email,
-                        receiverEmail: selectItem,
-                        amount: _editedTransaction.amount,
-                      );
-                      setState(() {
-                        _currentItemSelected = selectItem;
-                      });
-                    },
-                    value: _currentItemSelected,
-                  ),
-                ),
-              ],
+            padding: EdgeInsets.symmetric(
+              horizontal: defaultSize * 1.0,
+              vertical: defaultSize * 0.5,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(defaultSize * 1.0),
+            ),
+            child: DropdownButton(
+              icon: Icon(Icons.arrow_drop_down_outlined),
+              iconSize: 42,
+              underline: SizedBox(),
+              items: userData.users.map((User dropDownItem) {
+                return DropdownMenuItem(
+                  value: dropDownItem.email,
+                  child: Text(dropDownItem.email),
+                );
+              }).toList(),
+              onChanged: (String selectItem) {
+                _editedTransaction = Transaction(
+                  id: _editedTransaction.id,
+                  senderEmail: _currentUser.email,
+                  receiverEmail: selectItem,
+                  amount: _editedTransaction.amount,
+                );
+                setState(() {
+                  _currentItemSelected = selectItem;
+                });
+              },
+              value: _currentItemSelected,
             ),
           ),
           SizedBox(
             height: 25,
           ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Select Amount'),
-                Container(
-                  width: defaultSize * 21.5,
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    decoration: InputDecoration(
-                      hintText: '5000.0',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onFieldSubmitted: (_) {
-                      _saveForm();
-                    },
-                    onSaved: (value) {
-                      _editedTransaction = Transaction(
-                        id: null,
-                        senderEmail: _currentUser.email,
-                        receiverEmail: _editedTransaction.receiverEmail,
-                        amount: double.parse(value),
-                      );
-                    },
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter an amount';
-                      }
-                      if (double.tryParse(value) == null) {
-                        return 'Please enter a valid amount';
-                      }
-                      if (double.parse(value) <= 0) {
-                        return 'Please enter an that is greater than zero.';
-                      }
-                      if (double.parse(value) >= _currentUser.amount) {
-                        return "You don't have that much amount ";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ],
+          Text('Select Amount'),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+              hintText: '5000.0',
+              hintStyle: TextStyle(color: Colors.grey),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
+            onFieldSubmitted: (_) {
+              _saveForm();
+            },
+            onSaved: (value) {
+              _editedTransaction = Transaction(
+                id: 1,
+                senderEmail: _currentUser.email,
+                receiverEmail: _editedTransaction.receiverEmail,
+                amount: double.parse(value),
+              );
+            },
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter an amount';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Please enter a valid amount';
+              }
+              if (double.parse(value) <= 0) {
+                return 'Please enter an that is greater than zero.';
+              }
+              if (double.parse(value) >= _currentUser.amount) {
+                return "You don't have that much amount ";
+              }
+              return null;
+            },
           ),
           SizedBox(
             height: 25,
@@ -143,7 +143,7 @@ class _BuildAppFormState extends State<BuildAppForm> {
             label: Text('Transfer Amount'),
             style: ElevatedButton.styleFrom(
               primary: kPrimaryColor,
-              fixedSize: Size(300, 50),
+              minimumSize: Size(300, 50),
             ),
           ),
         ],

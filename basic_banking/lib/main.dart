@@ -7,7 +7,7 @@ import './screens/transaction_history/transaction_history.dart';
 import './screens/transaction_screen/transaction_screen.dart';
 import 'screens/home_screen/home_screen.dart';
 import './models/user.dart';
-import './models/transaction.dart';
+import 'models/transaction_list.dart';
 
 void main() {
   runApp(MyApp());
