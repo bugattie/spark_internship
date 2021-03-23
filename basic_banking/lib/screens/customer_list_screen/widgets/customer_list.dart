@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../customer_detail_screen/customer_detail_screen.dart';
 
 class CustomerList extends StatelessWidget {
-  final String id, name, imageSrc;
+  final int id;
+  final String name, imageSrc;
   final double amount;
 
   CustomerList({
@@ -40,7 +41,7 @@ class CustomerList extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pushNamed(
               CustomerDetailScreen.routeName,
-              arguments: id == null ? '1' : id,
+              arguments: id == null ? 1 : id,
             );
           },
         ),

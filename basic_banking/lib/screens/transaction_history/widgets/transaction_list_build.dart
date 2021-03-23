@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
-import '../../../constants.dart';
 
 class TransactionListBuild extends StatelessWidget {
   final int id;

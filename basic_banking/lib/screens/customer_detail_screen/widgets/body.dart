@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final userId = ModalRoute.of(context).settings.arguments as String;
     final currentUser = Provider.of<UserData>(context, listen: false)
-        .findById(userId == null ? '1' : userId);
+        .findById(userId == null ? 1 : userId);
     double defaultSize = SizeConfig.defaultSize;
 
     return Column(

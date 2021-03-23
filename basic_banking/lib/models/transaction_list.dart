@@ -30,9 +30,7 @@ class TransactionList with ChangeNotifier {
 
   Future<void> fetchAndSetData() async {
     final dataList = await DBHelper.getData('transactionHistory');
-    print('Data: $dataList');
 
-    Transaction.parseTransactionList(dataList);
     _transactions = Transaction.parseTransactionList(dataList);
     notifyListeners();
   }
