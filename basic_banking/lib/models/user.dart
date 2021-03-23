@@ -26,75 +26,21 @@ class UserData with ChangeNotifier {
   User findById(int id) {
     return _users.firstWhere((data) => data.id == id);
   }
-}
 
-// User(
-//   id: '1',
-//   name: 'John Doe',
-//   email: 'johndoe@service.com',
-//   imageSrc: 'assets/images/customer_male.png',
-//   amount: 5000.0,
-// ),
-// User(
-//   id: '2',
-//   name: 'Jane Doe',
-//   email: 'janedoe@service.com',
-//   imageSrc: 'assets/images/customer_female.png',
-//   amount: 7000.0,
-// ),
-// User(
-//   id: '3',
-//   name: 'James Mary',
-//   email: 'jamesmary@service.com',
-//   imageSrc: 'assets/images/customer_male.png',
-//   amount: 8000.0,
-// ),
-// User(
-//   id: '4',
-//   name: 'Lisa Ann',
-//   email: 'lisaann@service.com',
-//   imageSrc: 'assets/images/customer_female.png',
-//   amount: 8000.0,
-// ),
-// User(
-//   id: '5',
-//   name: 'Andrew Jane',
-//   email: 'andrewjane@service.com',
-//   imageSrc: 'assets/images/customer_male.png',
-//   amount: 11000.0,
-// ),
-// User(
-//   id: '6',
-//   name: 'Sarah Thomas',
-//   email: 'sarahthomas@service.com',
-//   imageSrc: 'assets/images/customer_female.png',
-//   amount: 13000.0,
-// ),
-// User(
-//   id: '7',
-//   name: 'Mark Paul',
-//   email: 'markpaul@service.com',
-//   imageSrc: 'assets/images/customer_male.png',
-//   amount: 12000.0,
-// ),
-// User(
-//   id: '8',
-//   name: 'Lisa Daniel',
-//   email: 'lisadaniel@service.com',
-//   imageSrc: 'assets/images/customer_female.png',
-//   amount: 14000.0,
-// ),
-// User(
-//   id: '9',
-//   name: 'Jason Ryan',
-//   email: 'jasonryan@service.com',
-//   imageSrc: 'assets/images/customer_male.png',
-//   amount: 11000.0,
-// ),
-// User(
-//   id: '10',
-//   name: 'Anna Helen',
-//   email: 'annahelen@service.com',
-//   imageSrc: 'assets/images/customer_male.png',
-//   amount: 13000.0,
-// ),
+  Future<void> fetchAndSetUserData() async {
+    final dataList = await DBHelper.getData('user_data');
+    print('User data: $dataList');
+    _users = dataList
+        .map(
+          (item) => User(
+            id: item['id'],
+            name: item['name'],
+            email: item['email'],
+            imageSrc: item['imageSrc'],
+            amount: item['amount'],
+          ),
+        )
+        .toList();
+    notifyListeners();
+  }
+}

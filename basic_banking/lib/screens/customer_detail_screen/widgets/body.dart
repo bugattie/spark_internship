@@ -10,7 +10,7 @@ import './info.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final userId = ModalRoute.of(context).settings.arguments as String;
+    final userId = ModalRoute.of(context).settings.arguments as int;
     final currentUser = Provider.of<UserData>(context, listen: false)
         .findById(userId == null ? 1 : userId);
     double defaultSize = SizeConfig.defaultSize;

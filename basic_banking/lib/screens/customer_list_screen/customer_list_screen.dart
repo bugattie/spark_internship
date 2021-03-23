@@ -12,21 +12,35 @@ class CustomerListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     double defaultSize = SizeConfig.defaultSize;
-    final userData = Provider.of<UserData>(context, listen: false).users;
 
     return Scaffold(
       appBar: CustomAppBar('Our Customers'),
       body: Padding(
         padding: EdgeInsets.all(defaultSize * 0.8),
-        child: ListView.builder(
-          itemCount: userData.length,
-          itemBuilder: (ctx, i) => CustomerList(
-            id: userData[i].id,
-            name: userData[i].name,
-            amount: userData[i].amount,
-            imageSrc: userData[i].imageSrc,
-          ),
-        ),
+        child: FutureBuilder(
+            future: Provider.of<UserData>(context, listen: false)
+                .fetchAndSetUserData(),
+            builder: (ctx, snapshot) => snapshot.connectionState ==
+                    ConnectionState.waiting
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Consumer<UserData>(
+                    child: Center(
+                      child: Text('No transaction happened'),
+                    ),
+                    builder: (ctx, userData, ch) => userData.users.length <= 0
+                        ? ch
+                        : ListView.builder(
+                            itemCount: userData.users.length,
+                            itemBuilder: (ctx, i) => CustomerList(
+                              id: userData.users[i].id,
+                              name: userData.users[i].name,
+                              amount: userData.users[i].amount,
+                              imageSrc: userData.users[i].imageSrc,
+                            ),
+                          ),
+                  )),
       ),
     );
   }
