@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './screens/customer_detail_screen/customer_detail_screen.dart';
-import './screens/customer_list_screen/customer_list_screen.dart';
-import './screens/transaction_history/transaction_history.dart';
-import './screens/transaction_screen/transaction_screen.dart';
 import 'screens/home_screen/home_screen.dart';
-import './models/user.dart';
 import 'models/transaction_list.dart';
+import './models/user.dart';
+import './routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,12 +29,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.green,
         ),
         home: HomeScreen(),
-        routes: {
-          CustomerListScreen.routeName: (ctx) => CustomerListScreen(),
-          CustomerDetailScreen.routeName: (ctx) => CustomerDetailScreen(),
-          TransactionScreen.routeName: (ctx) => TransactionScreen(),
-          TransactionHistory.routeName: (ctx) => TransactionHistory(),
-        },
+        routes: routes,
       ),
     );
   }
