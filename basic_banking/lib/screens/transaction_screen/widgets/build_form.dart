@@ -16,8 +16,8 @@ class BuildAppForm extends StatefulWidget {
 
 class _BuildAppFormState extends State<BuildAppForm> {
   String _currentItemSelected = 'janedoe@service.com';
+  User receiverData;
   final _form = GlobalKey<FormState>();
-  // int newId = 0;
   var _editedTransaction = Transaction(
     id: 0,
     senderEmail: '',
@@ -25,7 +25,8 @@ class _BuildAppFormState extends State<BuildAppForm> {
     amount: 0,
   );
 
-  void _saveForm() async {
+  void _saveForm(
+      double senderCurrentAmount, double receiverCurrentAmount) async {
     final isValid = _form.currentState.validate();
     if (!isValid) return;
     _form.currentState.save();
@@ -37,13 +38,24 @@ class _BuildAppFormState extends State<BuildAppForm> {
       _editedTransaction.receiverEmail,
       _editedTransaction.amount,
     );
+    final updateUserData = Provider.of<UserData>(context, listen: false);
+    updateUserData.fetchAndUpdateData(
+      _editedTransaction.senderEmail,
+      senderCurrentAmount,
+      _editedTransaction.receiverEmail,
+      receiverCurrentAmount,
+      _editedTransaction.amount,
+    );
     Navigator.of(context).pop();
   }
+  // senderEmail senderCurrentAmount, receiverEmail, receiverCurrentAmount, amount
 
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserData>(context, listen: false);
     final _currentUser = ModalRoute.of(context).settings.arguments as User;
+    receiverData = userData.findByEmail(_currentItemSelected);
+
     double defaultSize = SizeConfig.defaultSize;
 
     return Form(
@@ -106,7 +118,7 @@ class _BuildAppFormState extends State<BuildAppForm> {
               ),
             ),
             onFieldSubmitted: (_) {
-              _saveForm();
+              _saveForm(_currentUser.amount, receiverData.amount);
             },
             onSaved: (value) {
               _editedTransaction = Transaction(
@@ -137,7 +149,7 @@ class _BuildAppFormState extends State<BuildAppForm> {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              _saveForm();
+              _saveForm(_currentUser.amount, receiverData.amount);
             },
             icon: Icon(Icons.attach_money),
             label: Text('Transfer Amount'),

@@ -27,9 +27,12 @@ class UserData with ChangeNotifier {
     return _users.firstWhere((data) => data.id == id);
   }
 
+  User findByEmail(String email) {
+    return _users.firstWhere((data) => data.email == email);
+  }
+
   Future<void> fetchAndSetUserData() async {
     final dataList = await DBHelper.getData('user_data');
-    print('User data: $dataList');
     _users = dataList
         .map(
           (item) => User(
@@ -41,6 +44,29 @@ class UserData with ChangeNotifier {
           ),
         )
         .toList();
+    notifyListeners();
+  }
+
+  Future<void> fetchAndUpdateData(
+    String senderEmail,
+    double senderCurrentAmount,
+    String receiverEmail,
+    double receiverCurrentAmount,
+    double amount,
+  ) async {
+    var senderUpdatedAmount = senderCurrentAmount - amount;
+    var receiverUpdatedAmount = receiverCurrentAmount + amount;
+
+    print({
+      senderEmail,
+      senderUpdatedAmount,
+      receiverEmail,
+      receiverUpdatedAmount,
+      amount,
+    });
+
+    await DBHelper.update('user_data', senderEmail, senderUpdatedAmount);
+    await DBHelper.update('user_data', receiverEmail, receiverUpdatedAmount);
     notifyListeners();
   }
 }

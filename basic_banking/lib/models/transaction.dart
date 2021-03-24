@@ -12,14 +12,12 @@ class Transaction {
   });
 
   factory Transaction.fromMap(Map<String, dynamic> map) {
-    print("Map: ${map['amount']}");
     var trans = Transaction(
       id: map['id'],
       senderEmail: map['senderEmail'],
       receiverEmail: map['receiverEmail'],
       amount: map['amount'],
     );
-    print(trans);
     return trans;
   }
 
