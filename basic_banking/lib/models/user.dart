@@ -57,14 +57,6 @@ class UserData with ChangeNotifier {
     var senderUpdatedAmount = senderCurrentAmount - amount;
     var receiverUpdatedAmount = receiverCurrentAmount + amount;
 
-    print({
-      senderEmail,
-      senderUpdatedAmount,
-      receiverEmail,
-      receiverUpdatedAmount,
-      amount,
-    });
-
     await DBHelper.update('user_data', senderEmail, senderUpdatedAmount);
     await DBHelper.update('user_data', receiverEmail, receiverUpdatedAmount);
     notifyListeners();
