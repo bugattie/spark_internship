@@ -17,24 +17,7 @@ class LoginScreen extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               height: defaultSize * 28.7,
-              child: Container(
-                height: 80,
-                width: 80,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(defaultSize * 1.5),
-                    bottomRight: Radius.circular(defaultSize * 1.5),
-                    bottomLeft: Radius.circular(defaultSize * 1.5),
-                  ),
-                ),
-                child: SvgPicture.asset(
-                  'assets/icons/person.svg',
-                  color: kPrimaryColor,
-                  height: defaultSize * 4,
-                ),
-              ),
+              child: TopBar(defaultSize: defaultSize),
             ),
             Expanded(
               child: Container(
@@ -45,59 +28,104 @@ class LoginScreen extends StatelessWidget {
                     topLeft: Radius.circular(defaultSize * 8),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      'Login',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: defaultSize * 4,
-                      ),
-                    ),
-                    Spacer(),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFE95656),
-                        onPrimary: Colors.white,
-                        minimumSize: Size(defaultSize * 30, defaultSize * 6),
-                        textStyle: TextStyle(
-                          fontSize: defaultSize * 1.5,
-                        ),
-                      ),
-                      icon: FaIcon(FontAwesomeIcons.google),
-                      label: Text('Login With Google'),
-                      onPressed: () {},
-                    ),
-                    SizedBox(
-                      height: defaultSize * 2,
-                    ),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF496CA7),
-                        onPrimary: Colors.white,
-                        minimumSize: Size(defaultSize * 30, defaultSize * 6),
-                        textStyle: TextStyle(
-                          fontSize: defaultSize * 1.5,
-                        ),
-                      ),
-                      icon: FaIcon(FontAwesomeIcons.facebook),
-                      label: Text('Login With Facebook'),
-                      onPressed: () {},
-                    ),
-                    SizedBox(
-                      height: defaultSize * 5,
-                    ),
-                  ],
-                ),
+                child: LoginDetail(defaultSize: defaultSize),
               ),
             )
           ],
         ),
       ),
+    );
+  }
+}
+
+class TopBar extends StatelessWidget {
+  const TopBar({
+    Key key,
+    @required this.defaultSize,
+  }) : super(key: key);
+
+  final double defaultSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      width: 80,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(defaultSize * 1.5),
+          bottomRight: Radius.circular(defaultSize * 1.5),
+          bottomLeft: Radius.circular(defaultSize * 1.5),
+        ),
+      ),
+      child: SvgPicture.asset(
+        'assets/icons/user.svg',
+        color: kTextLightColor,
+        height: 40,
+      ),
+    );
+  }
+}
+
+class LoginDetail extends StatelessWidget {
+  const LoginDetail({
+    Key key,
+    @required this.defaultSize,
+  }) : super(key: key);
+
+  final double defaultSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 40,
+        ),
+        Text(
+          'Login',
+          style: TextStyle(
+            color: kTextLightColor,
+            fontWeight: FontWeight.bold,
+            fontSize: defaultSize * 4,
+          ),
+        ),
+        Spacer(),
+        ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            primary: Color(0xFFE95656),
+            onPrimary: Colors.white,
+            minimumSize: Size(defaultSize * 30, defaultSize * 6),
+            textStyle: TextStyle(
+              fontSize: defaultSize * 1.5,
+            ),
+          ),
+          icon: FaIcon(FontAwesomeIcons.google),
+          label: Text('Login With Google'),
+          onPressed: () {},
+        ),
+        SizedBox(
+          height: defaultSize * 2,
+        ),
+        ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            primary: Color(0xFF496CA7),
+            onPrimary: Colors.white,
+            minimumSize: Size(defaultSize * 30, defaultSize * 6),
+            textStyle: TextStyle(
+              fontSize: defaultSize * 1.5,
+            ),
+          ),
+          icon: FaIcon(FontAwesomeIcons.facebook),
+          label: Text('Login With Facebook'),
+          onPressed: () {},
+        ),
+        SizedBox(
+          height: defaultSize * 5,
+        ),
+      ],
     );
   }
 }
