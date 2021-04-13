@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
 import '../../providers/google_sign_in.dart';
 import './widgets/login_detail.dart';
@@ -15,11 +16,11 @@ class LoginScreen extends StatelessWidget {
     double defaultSize = SizeConfig.defaultSize;
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: ChangeNotifierProvider.value(
-        value: GoogleSignInProvider(),
-        child: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, snapshot) {
+      body: ChangeNotifierProvider(
+        create: (context) => GoogleSignInProvider(),
+        child: FutureBuilder(
+          future: Firebase.initializeApp(),
+          builder: (context, snapshot) {
             final provider = Provider.of<GoogleSignInProvider>(context);
 
             if (provider.isSigningIn)
