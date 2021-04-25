@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/google_sign_in.dart';
@@ -8,18 +7,20 @@ import '../../constants.dart';
 import '../../size_config.dart';
 
 class LoginUserDetailScreen extends StatelessWidget {
+  final String photoUrl, displayName, email;
+
+  LoginUserDetailScreen(this.photoUrl, this.displayName, this.email);
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final double defaultSize = SizeConfig.defaultSize;
-    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       body: Stack(
         children: [
           ClipPath(
             clipper: CustomShapeBar(),
             child: Container(
-              // alignment: Alignment.centerLeft,
               width: double.infinity,
               height: defaultSize * 30,
               color: kPrimaryColor,
@@ -62,12 +63,12 @@ class LoginUserDetailScreen extends StatelessWidget {
                               color: Color(0xFF1976D3),
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: NetworkImage(user.photoURL),
+                                image: NetworkImage(photoUrl),
                               ),
                             ),
                           ),
                           Text(
-                            user.displayName,
+                            displayName,
                             style: TextStyle(
                                 fontSize: defaultSize * 2.2, color: kTextColor),
                           ),
@@ -75,7 +76,7 @@ class LoginUserDetailScreen extends StatelessWidget {
                             height: defaultSize / 2,
                           ), //5
                           Text(
-                            user.email,
+                            email,
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: kTextLightColor),
