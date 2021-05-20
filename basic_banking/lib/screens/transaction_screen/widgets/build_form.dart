@@ -27,6 +27,7 @@ class _BuildAppFormState extends State<BuildAppForm> {
 
   void _saveForm(
       double senderCurrentAmount, double receiverCurrentAmount) async {
+    FocusScope.of(context).unfocus();
     final isValid = _form.currentState.validate();
     if (!isValid) return;
     _form.currentState.save();
@@ -48,7 +49,6 @@ class _BuildAppFormState extends State<BuildAppForm> {
     );
     Navigator.of(context).pop();
   }
-  // senderEmail senderCurrentAmount, receiverEmail, receiverCurrentAmount, amount
 
   @override
   Widget build(BuildContext context) {

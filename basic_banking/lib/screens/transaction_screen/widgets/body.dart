@@ -23,30 +23,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-
-/*
-  SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            // width: MediaQuery.of(context).size.width * 0.9,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                BarDetails(
-                  defaultSize: defaultSize,
-                  image: 'assets/images/transaction_new.png',
-                  heading: 'Make a Transaction',
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: defaultSize * 4.0),
-                  child: BuildAppForm(defaultSize: defaultSize),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-*/
